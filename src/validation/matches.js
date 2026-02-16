@@ -34,7 +34,7 @@ export const createMatchSchema = z
 
     if (endDate <= startDate) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         message: "End time must be after start time",
         path: ["endTime"],
       });

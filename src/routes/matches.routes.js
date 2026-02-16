@@ -29,7 +29,7 @@ matchRouter.get("/", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Failed to fetch matches",
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
     });
   }
 });
@@ -63,7 +63,7 @@ matchRouter.post("/", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Failed to create a match",
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
     });
   }
 });
