@@ -22,7 +22,7 @@ server.listen(PORT, HOST, () => {
   const baseUrl =
     HOST === "0.0.0.0" ? `http://localhost:${PORT}` : `http://${HOST}:${PORT}`;
 
-  console.log(`HTTP Server is listening on port ${baseUrl}`);
+  console.log(`HTTP Server is listening at ${baseUrl}`);
   console.log(
     `WebSocket Server is available at ${baseUrl.replace("http", "ws")}/ws`,
   );

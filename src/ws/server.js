@@ -1,6 +1,4 @@
-import { clear } from "console";
 import { WebSocket, WebSocketServer } from "ws";
-import { set } from "zod";
 
 function sendJson(socket, data) {
   if (socket.readyState !== WebSocket.OPEN) {
@@ -47,11 +45,11 @@ export function attachWebSocketServer(server) {
       }
       socket.isAlive = false;
       socket.ping();
-    }, 30000);
-
-    wss.on("close", () => {
-      clearInterval(interval);
     });
+  }, 30000);
+
+  wss.on("close", () => {
+    clearInterval(interval);
   });
   function broadcastMatchCreated(match) {
     broadcast(wss, { type: "match-created", match });
