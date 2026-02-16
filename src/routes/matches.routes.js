@@ -14,7 +14,7 @@ matchRouter.get("/", async (req, res) => {
   if (!parsed.success) {
     return res.status(400).json({
       message: "Invalid query parameters",
-      error: JSON.stringify(parsed.error),
+      error: parsed.error.issues,
     });
   }
   const limit = Math.min(parsed.data.limit ?? 50, 100);
@@ -29,7 +29,7 @@ matchRouter.get("/", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Failed to fetch matches",
-      error: JSON.stringify(error),
+      error: error instanceof Error ? error.message : String(error),
     });
   }
 });
@@ -40,7 +40,7 @@ matchRouter.post("/", async (req, res) => {
   if (!parsed.success) {
     return res.status(400).json({
       message: "Invalid request body",
-      error: JSON.stringify(parsed.error),
+      error: parsed.error.issues,
     });
   }
   const { data: { startTime, endTime, homeScore, awayScore } = {} } = parsed;
@@ -63,7 +63,7 @@ matchRouter.post("/", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Failed to create a match",
-      error: JSON.stringify(error),
+      error: error instanceof Error ? error.message : String(error),
     });
   }
 });
