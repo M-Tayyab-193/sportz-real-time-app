@@ -7,6 +7,7 @@ import { db } from "#db/db.ts";
 import { getMatchStatus } from "#utils/match-status.js";
 import { matches } from "#db/schema.ts";
 import { desc } from "drizzle-orm";
+import commentaryRouter from "#routes/commentary.routes.js";
 const matchRouter = express.Router();
 
 matchRouter.get("/", async (req, res) => {
@@ -75,5 +76,7 @@ matchRouter.post("/", async (req, res) => {
     });
   }
 });
+
+matchRouter.use("/:id/commentary", commentaryRouter);
 
 export default matchRouter;
