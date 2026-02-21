@@ -80,6 +80,9 @@ commentaryRouter.post("/", async (req, res) => {
       })
       .returning();
 
+    if (res.app.locals.broadcastCommentary) {
+      res.app.locals.broadcastCommentary(entry.matchId, entry);
+    }
     return res.status(201).json({
       message: "Commentary created successfully",
       data: entry,
